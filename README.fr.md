@@ -59,7 +59,7 @@ GoToProjects/
 1. Clonez ou téléchargez ce dépôt
 
 ```bash
-git clone https://github.com/VivicatcHub/GoToProjects/
+git clone https://github.com/VivicatcHub/GoToProjects.git
 cd GoToProjects
 ```
 

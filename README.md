@@ -60,7 +60,7 @@ GoToProjects/
 1. Clone or download this repository
 
 ```bash
-git clone https://github.com/VivicatcHub/GoToProjects/
+git clone https://github.com/VivicatcHub/GoToProjects.git
 cd GoToProjects
 ```
 
