@@ -1,0 +1,23 @@
+#!/bin/zsh
+
+# Wrapper script for go_to_project.py
+# This ensures the directory change persists in the current shell
+
+if [ -z "$1" ]; then
+    echo "Usage: gtp <project_name>"
+fi
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+TEMP_SCRIPT="/tmp/gtp_$1.sh"
+
+# Run the Python script and generate commands to execute
+python3 "$SCRIPT_DIR/go_to_project.py" "$1"
+
+# If the script was generated successfully, source it
+if [ -f "$TEMP_SCRIPT" ]; then
+    chmod +x "$TEMP_SCRIPT"
+    source "$TEMP_SCRIPT"
+    rm -f "$TEMP_SCRIPT"
+else
+    echo "❌ No script generated for project '$1'"
+fi

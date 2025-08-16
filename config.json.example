@@ -1,0 +1,23 @@
+{
+  "config": {
+    "path": "/home/vivicaty/Perso/GoToProjects/config.json",
+    "vscode": true,
+    "pull": false,
+    "commands": []
+  },
+  "project1": {
+    "path": "/home/user/path/to/project1",
+    "vscode": true,
+    "pull": true,
+    "commands": [
+      "npm run dev",
+      "echo 'some text'"
+    ]
+  },
+  "project2": {
+    "path": "/home/user/path/to/project2",
+    "vscode": true,
+    "pull": false,
+    "commands": []
+  }
+}
