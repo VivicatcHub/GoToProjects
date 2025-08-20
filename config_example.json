@@ -9,10 +9,7 @@
     "path": "/home/user/path/to/project1",
     "vscode": true,
     "pull": true,
-    "commands": [
-      "npm run dev",
-      "echo 'some text'"
-    ]
+    "commands": ["npm run dev", "echo 'some text'"]
   },
   "project2": {
     "path": "/home/user/path/to/project2",

@@ -25,23 +25,23 @@ class GoToProject:
 
     def echo(self, content: str):
         """Writes an echo command to the script file."""
-        self.script_file.write(f"echo '{content}'\n")
+        self.write(f"echo '{content}'\n")
 
     def cd(self, path: str):
         """Writes a cd command to the script file."""
-        self.script_file.write(f"cd '{path}'\n")
+        self.write(f"cd '{path}'\n")
 
     def pull(self):
         """Writes a git pull command to the script file."""
-        self.script_file.write("git pull\n")
+        self.write("git pull\n")
 
     def vscode(self, path: str):
         """Writes a command to open the project in VSCode."""
-        self.script_file.write(f"code '{path}'\n")
+        self.write(f"code '{path}'\n")
 
     def generate_script(self):
         """Generates the script for the specified project."""
-        self.script_file.write("#!/bin/zsh\n")
+        self.write("#!/bin/zsh\n")
 
         if self.project_name in self.projects:
             self.generate_script_for_project(self.projects[self.project_name])
@@ -49,6 +49,18 @@ class GoToProject:
             self.echo(f"❓ Project '{self.project_name}' not found.")
             available_projects = [project for project in self.projects.keys() if project[0] == self.project_name[0]]
             self.echo(f"📋 Available projects: {', '.join(available_projects) if available_projects else 'None'}")
+
+    def write_command(self, command: str):
+        """Writes a command to the script file."""
+        if command[:4] != "echo":
+            self.echo(f"💻 Executing command: {command}")
+        self.write(f"{command}\n")
+
+    def tab_write_command(self, command: str):
+        """Writes a command to the script file."""
+        if command[:4] != "echo":
+            self.echo(f"\t💻 Executing command: {command}")
+        self.write(f"\t{command}\n")
 
     def generate_script_for_project(self, project):
         """Generates the script for the specified project."""
@@ -60,10 +72,19 @@ class GoToProject:
             self.echo("🔄 Pulling latest changes...")
             self.pull()
 
-        for command in project["commands"]:
-            if command[:4] != "echo":
-                self.echo(f"💻 Executing command: {command}")
-            self.script_file.write(f"{command}\n")
+        if project["never_ask"]:
+            # Execute commands without asking
+            for command in project["commands"]:
+                self.write_command(command)
+        else:
+            # Generate zsh code to ask for confirmation
+            self.write('echo -n "Do you want to execute commands? (Y/n): "\n')
+            self.write("read response\n")
+            self.write('if [[ "$response" != "n" && "$response" != "N" ]]; then\n')
+            self.write("\techo 'Executing commands...'\n")
+            for command in project["commands"]:
+                self.tab_write_command(command)
+            self.write("fi\n")
 
         if project.get("vscode"):
             self.echo("🖥️ Opening in VSCode...")

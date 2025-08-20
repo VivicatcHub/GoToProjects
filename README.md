@@ -48,7 +48,7 @@ GoToProjects/
 ├── gtp                  # Shell wrapper script
 ├── install.sh           # Installation script
 ├── config.json          # Project configuration
-├── config.json.example  # Configuration example
+├── config_example.json  # Configuration example
 ├── requirements.txt     # Python dependencies
 └── README.md            # This file
 ```
@@ -94,7 +94,7 @@ This method doesn't require root privileges but only works from the project dire
 1. Copy the example file:
 
 ```bash
-cp config.json.example config.json
+cp config_example.json config.json
 ```
 
 2. Edit `config.json` according to your projects:
@@ -232,17 +232,20 @@ Temporary scripts are created in `/tmp/gtp_<project_name>.sh` and automatically 
 
 ## Version History
 
-### v2.0 (Current)
+### v1.2 (Current)
 
-- ✅ System installation to `/usr/bin/`
-- ✅ Automatically integrated absolute paths
-- ✅ Python script with classes
+- ✅ Support for the `never_ask` option to execute commands without confirmation
+- ✅ Integrated confirmation prompt in the generated bash script (zsh compatible)
+
+### v1.1
+
+- ✅ System installation in `/usr/bin/`
 - ✅ Improved error handling
 - ✅ Automatic cleanup of temporary files
 
 ### v1.0
 
-- ✅ Initial version with zsh function
+- ✅ Initial release with zsh function
 - ✅ Project support via JSON
 - ✅ Custom commands
 
