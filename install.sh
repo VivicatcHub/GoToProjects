@@ -13,31 +13,31 @@ ZSHRC="$USER_HOME/.zshrc"
 
 # Check if source files exist
 if [ ! -f "$GTP_SOURCE" ]; then
-    echo "❌ Error: gtp script not found at $GTP_SOURCE"
-    exit 1
+	echo "❌ Error: gtp script not found at $GTP_SOURCE"
+	exit 1
 fi
 
 if [ ! -f "$PYTHON_SCRIPT" ]; then
-    echo "❌ Error: go_to_project.py not found at $PYTHON_SCRIPT"
-    exit 1
+	echo "❌ Error: go_to_project.py not found at $PYTHON_SCRIPT"
+	exit 1
 fi
 
 if [ ! -f "$CONFIG_FILE" ]; then
-    echo "❌ Error: config.json not found at $CONFIG_FILE"
-    exit 1
+	echo "❌ Error: config.json not found at $CONFIG_FILE"
+	exit 1
 fi
 
 # Check if running as root or with sudo
 if [ "$EUID" -ne 0 ]; then
-    echo "🔐 This script requires root privileges to install to /usr/bin"
-    echo "📝 Please run: sudo ./install.sh"
-    exit 1
+	echo "🔐 This script requires root privileges to install to /usr/bin"
+	echo "📝 Please run: sudo ./install.sh"
+	exit 1
 fi
 
 # Create a temporary modified gtp script with absolute paths
 TEMP_GTP="/tmp/gtp_install_$$"
 
-cat > "$TEMP_GTP" << EOF
+cat >"$TEMP_GTP" <<EOF
 #!/bin/zsh
 
 # Wrapper script for go_to_project.py
@@ -84,36 +84,36 @@ printf "Choose an option [1/2/3]: "
 read choice
 
 case "$choice" in
-    1)
-        if ! grep -q "alias gtp='source /usr/bin/gtp'" $BASHRC; then
-            echo "Adding alias to $BASHRC for convenience..."
-            echo "alias gtp='source /usr/bin/gtp'" >> $BASHRC
-            echo "Please restart your terminal or run 'source $BASHRC' to apply changes."
-        else
-            echo "Alias already exists in $BASHRC"
-        fi
-    ;;
-    2)
-        if ! grep -q "alias gtp='source /usr/bin/gtp'" $ZSHRC; then
-            echo "Adding alias to $ZSHRC for convenience..."
-            echo "alias gtp='source /usr/bin/gtp'" >> $ZSHRC
-            echo "Please restart your terminal or run 'source $ZSHRC' to apply changes."
-        else
-            echo "Alias already exists in $ZSHRC"
-        fi
-    ;;
-    *)
-        echo "No alias added. You can add it manually or use 'source /usr/bin/gtp' each time."
-    ;;
+1)
+	if ! grep -q "alias gtp='source /usr/bin/gtp'" $BASHRC; then
+		echo "Adding alias to $BASHRC for convenience..."
+		echo "alias gtp='source /usr/bin/gtp'" >>$BASHRC
+		echo "Please restart your terminal or run 'source $BASHRC' to apply changes."
+	else
+		echo "Alias already exists in $BASHRC"
+	fi
+	;;
+2)
+	if ! grep -q "alias gtp='source /usr/bin/gtp'" $ZSHRC; then
+		echo "Adding alias to $ZSHRC for convenience..."
+		echo "alias gtp='source /usr/bin/gtp'" >>$ZSHRC
+		echo "Please restart your terminal or run 'source $ZSHRC' to apply changes."
+	else
+		echo "Alias already exists in $ZSHRC"
+	fi
+	;;
+*)
+	echo "No alias added. You can add it manually or use 'source /usr/bin/gtp' each time."
+	;;
 esac
 
 # Verify installation
 if [ -f "/usr/bin/gtp" ]; then
-    echo "✅ gtp successfully installed to /usr/bin"
-    echo "📁 Python script path: $PYTHON_SCRIPT"
-    echo "📁 Config file path: $CONFIG_FILE"
-    echo "📖 You can now use 'gtp <project_name>' from anywhere"
+	echo "✅ gtp successfully installed to /usr/bin"
+	echo "📁 Python script path: $PYTHON_SCRIPT"
+	echo "📁 Config file path: $CONFIG_FILE"
+	echo "📖 You can now use 'gtp <project_name>' from anywhere"
 else
-    echo "❌ Installation failed"
-    exit 1
+	echo "❌ Installation failed"
+	exit 1
 fi
