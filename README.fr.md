@@ -172,7 +172,7 @@ gtp wow
 Le script suggère des projets similaires basés sur la première lettre :
 
 ```bash
-$ gtp zf
+$ gtp ma
 ❓ Project 'ma' not found.
 📋 Available projects: marin-kitagawa
 ```
@@ -210,13 +210,11 @@ sudo rm /usr/bin/gtp
 ### Architecture
 
 1. **`go_to_project.py`** : Script Python principal qui :
-
    - Lit la configuration JSON
    - Génère un script shell temporaire avec les commandes
    - Place le script dans `/tmp/gtp_<project_name>.sh`
 
 2. **`gtp`** : Script shell wrapper qui :
-
    - Appelle le script Python
    - Source le script temporaire généré
    - Nettoie le fichier temporaire
@@ -231,7 +229,15 @@ Les scripts temporaires sont créés dans `/tmp/gtp_<project_name>.sh` et automa
 
 ## Historique des versions
 
-### v1.2 (Actuelle)
+### v1.3 (Actuelle)
+
+- ✅ Noms de projets insensibles à la casse
+- ✅ Nouvelle commande `list` pour afficher tous les projets disponibles
+- ✅ Recherche améliorée avec filtrage par caractère initial
+- ✅ Meilleure gestion des erreurs et des messages
+- ✅ Correction de l'erreur quand aucun nom de projet n'est fourni
+
+### v1.2
 
 - ✅ Support de l'option `never_ask` pour exécuter les commandes sans confirmation
 - ✅ Demande de confirmation intégrée dans le script bash généré (compatible zsh)

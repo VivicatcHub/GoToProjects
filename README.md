@@ -211,13 +211,11 @@ sudo rm /usr/bin/gtp
 ### Architecture
 
 1. **`go_to_project.py`**: Main Python script that:
-
    - Reads the JSON configuration
    - Generates a temporary shell script with commands
    - Places the script in `/tmp/gtp_<project_name>.sh`
 
 2. **`gtp`**: Shell wrapper script that:
-
    - Calls the Python script
    - Sources the generated temporary script
    - Cleans up the temporary file
@@ -232,7 +230,15 @@ Temporary scripts are created in `/tmp/gtp_<project_name>.sh` and automatically 
 
 ## Version History
 
-### v1.2 (Current)
+### v1.3 (Current)
+
+- ✅ Case-insensitive project names
+- ✅ New `list` command to display all available projects
+- ✅ Improved project search with beginning character filtering
+- ✅ Better error handling and messages
+- ✅ Fix error when project name is not provided
+
+### v1.2
 
 - ✅ Support for the `never_ask` option to execute commands without confirmation
 - ✅ Integrated confirmation prompt in the generated bash script (zsh compatible)
