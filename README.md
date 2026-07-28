@@ -4,6 +4,8 @@ A command-line tool to quickly navigate to your development projects and automat
 
 - [French Doc](README.fr.md)
 
+![Image](image.png)
+
 ## Table of Contents
 
 - [Features](#features)

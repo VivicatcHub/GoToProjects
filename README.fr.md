@@ -4,6 +4,8 @@ Un outil en ligne de commande pour naviguer rapidement vers vos projets de déve
 
 - [Doc anglaise](README.md)
 
+![Image](image.png)
+
 ## Sommaire
 
 - [Fonctionnalités](#fonctionnalites)
